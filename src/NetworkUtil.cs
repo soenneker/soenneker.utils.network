@@ -3,6 +3,7 @@ using System.Linq;
 using System.Net;
 using System.Net.NetworkInformation;
 using Microsoft.Extensions.Logging;
+using Soenneker.Extensions.Enumerable;
 using Soenneker.Utils.Network.Abstract;
 
 namespace Soenneker.Utils.Network;
@@ -17,26 +18,26 @@ public class NetworkUtil : INetworkUtil
         _logger = logger;
     }
 
+    // TODO: Handle logging here, prob not necessary
     [Pure]
     public bool IsPortBusy(int port)
     {
         var ipGp = IPGlobalProperties.GetIPGlobalProperties();
         IPEndPoint[] endpoints = ipGp.GetActiveTcpListeners();
 
-        // ReSharper disable once ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
-        if (endpoints == null || endpoints.Length == 0)
+        if (endpoints.IsNullOrEmpty())
         {
-            _logger.LogInformation("{port} port is not busy", port);
+            _logger.LogDebug("{port} port is not busy", port);
             return false;
         }
 
         if (endpoints.Any(endpoint => endpoint.Port == port))
         {
-            _logger.LogInformation("{port} port IS busy", port);
+            _logger.LogDebug("{port} port IS busy", port);
             return true;
         }
 
-        _logger.LogInformation("{port} port is not busy", port);
+        _logger.LogDebug("{port} port is not busy", port);
         return false;
     }
 }
