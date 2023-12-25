@@ -8,5 +8,5 @@
 ## Installation
 
 ```
-Install-Package Soenneker.Utils.Network
+dotnet add package Soenneker.Utils.Network
 ```
