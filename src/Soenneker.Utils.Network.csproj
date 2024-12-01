@@ -40,6 +40,6 @@
         <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="9.0.0" />
 
         
-        <PackageReference Include="Soenneker.Extensions.Enumerable" Version="3.0.228" />
+        <PackageReference Include="Soenneker.Extensions.Enumerable" Version="3.0.229" />
     </ItemGroup>
 </Project>
