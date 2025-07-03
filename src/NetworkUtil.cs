@@ -9,7 +9,7 @@ using Soenneker.Utils.Network.Abstract;
 namespace Soenneker.Utils.Network;
 
 ///<inheritdoc cref="INetworkUtil"/>
-public class NetworkUtil : INetworkUtil
+public sealed class NetworkUtil : INetworkUtil
 {
     private readonly ILogger<NetworkUtil> _logger;
 
