@@ -9,4 +9,6 @@ public interface INetworkUtil
 {
     [Pure]
     bool IsPortBusy(int port);
+
+    int GetFreePort();
 }
