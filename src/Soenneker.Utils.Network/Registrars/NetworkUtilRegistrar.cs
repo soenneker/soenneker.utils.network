@@ -4,6 +4,9 @@ using Soenneker.Utils.Network.Abstract;
 
 namespace Soenneker.Utils.Network.Registrars;
 
+/// <summary>
+/// Represents the network util registrar.
+/// </summary>
 public static class NetworkUtilRegistrar
 {
     /// <summary>
