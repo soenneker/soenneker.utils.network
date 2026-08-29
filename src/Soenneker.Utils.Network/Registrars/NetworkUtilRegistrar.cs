@@ -12,6 +12,7 @@ public static class NetworkUtilRegistrar
     /// <summary>
     /// Adds <see cref="INetworkUtil"/> as a scoped service. (Recommended) <para/>
     /// </summary>
+    /// <returns>Adds <see cref="INetworkUtil"/> as a scoped service. (Recommended) <para/>.</returns>
     public static IServiceCollection AddNetworkUtilAsScoped(this IServiceCollection services)
     {
         services.TryAddScoped<INetworkUtil, NetworkUtil>();
@@ -23,6 +24,7 @@ public static class NetworkUtilRegistrar
     /// Adds <see cref="INetworkUtil"/> as a singleton service. <para/>
     /// (Use <see cref="AddNetworkUtilAsScoped"/> unless this is being consumed by a Singleton)
     /// </summary>
+    /// <returns>Adds <see cref="INetworkUtil"/> as a singleton service. <para/> (Use <see cref="AddNetworkUtilAsScoped"/> unless this is being consumed by a Singleton).</returns>
     public static IServiceCollection AddNetworkUtilAsSingleton(this IServiceCollection services)
     {
         services.TryAddSingleton<INetworkUtil, NetworkUtil>();

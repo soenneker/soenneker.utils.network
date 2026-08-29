@@ -8,16 +8,16 @@ namespace Soenneker.Utils.Network.Abstract;
 public interface INetworkUtil
 {
     /// <summary>
-    /// Executes the is port busy operation.
+    /// Determines whether a TCP port is currently bound by a local listener.
     /// </summary>
-    /// <param name="port">The port.</param>
-    /// <returns>A value indicating whether the operation succeeded.</returns>
+    /// <param name="port">The TCP port number.</param>
+    /// <returns>True when a listener uses the port.</returns>
     [Pure]
     bool IsPortBusy(int port);
 
     /// <summary>
-    /// Gets free port.
+    /// Asks the operating system for an available ephemeral TCP port.
     /// </summary>
-    /// <returns>The result of the operation.</returns>
+    /// <returns>An available ephemeral port.</returns>
     int GetFreePort();
 }
