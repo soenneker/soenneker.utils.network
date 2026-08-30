@@ -24,5 +24,25 @@ Then inject `INetworkUtil` wherever you need it.
 
 ## Common operations
 
-- `IsPortBusy()` - Returns `true` when the port appears among the machine's active TCP listeners.
-- `GetFreePort()` - Temporarily binds loopback port zero and returns the OS-assigned available port.
+```csharp
+if (networkUtil.IsPortBusy(5000))
+{
+    // A local TCP listener was present in the snapshot.
+}
+
+int candidatePort = networkUtil.GetFreePort();
+```
+
+`IsPortBusy` compares the requested number with the operating system's active TCP listener
+snapshot. It does not test UDP, remote hosts, firewall reachability, or whether the current process
+can bind a particular address. The result can change immediately after the call.
+
+`GetFreePort` asks the operating system to bind port zero on IPv4 loopback, reads the assigned port,
+then closes the listener before returning. The returned number is therefore a candidate, not a
+reservation: another thread or process can claim it before the caller binds. For reliable server
+startup, bind port zero on the actual server listener and keep that listener open instead of using
+a check-then-bind sequence.
+
+Both methods can surface socket or operating-system errors. The utility contains no mutable
+network state, so scoped and singleton registration are both available; choose the lifetime needed
+by its consumers.

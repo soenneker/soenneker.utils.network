@@ -8,7 +8,7 @@ namespace Soenneker.Utils.Network.Abstract;
 public interface INetworkUtil
 {
     /// <summary>
-    /// Determines whether a TCP port is currently bound by a local listener.
+    /// Determines whether a TCP port appears in the operating system's current local-listener snapshot.
     /// </summary>
     /// <param name="port">The TCP port number.</param>
     /// <returns>True when a listener uses the port.</returns>
@@ -16,8 +16,8 @@ public interface INetworkUtil
     bool IsPortBusy(int port);
 
     /// <summary>
-    /// Asks the operating system for an available ephemeral TCP port.
+    /// Temporarily binds IPv4 loopback port zero and returns the operating system-assigned TCP port after releasing it.
     /// </summary>
-    /// <returns>An available ephemeral port.</returns>
+    /// <returns>A port that was available for the temporary loopback listener.</returns>
     int GetFreePort();
 }
