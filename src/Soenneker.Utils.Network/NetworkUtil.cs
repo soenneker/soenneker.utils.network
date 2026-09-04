@@ -9,6 +9,7 @@ using System.Net.Sockets;
 
 namespace Soenneker.Utils.Network;
 
+/// <inheritdoc cref="INetworkUtil" />
 public sealed class NetworkUtil : INetworkUtil
 {
     private readonly ILogger<NetworkUtil> _logger;
