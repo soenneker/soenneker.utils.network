@@ -1,8 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
-using Soenneker.Extensions.Enumerable;
 using Soenneker.Utils.Network.Abstract;
 using System.Diagnostics.Contracts;
-using System.Linq;
 using System.Net;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
@@ -26,16 +24,19 @@ public sealed class NetworkUtil : INetworkUtil
         var ipGp = IPGlobalProperties.GetIPGlobalProperties();
         IPEndPoint[] endpoints = ipGp.GetActiveTcpListeners();
 
-        if (endpoints.IsNullOrEmpty())
+        if (endpoints.Length == 0)
         {
             _logger.LogDebug("{port} port is not busy", port);
             return false;
         }
 
-        if (endpoints.Any(endpoint => endpoint.Port == port))
+        for (var i = 0; i < endpoints.Length; i++)
         {
-            _logger.LogDebug("{port} port IS busy", port);
-            return true;
+            if (endpoints[i].Port == port)
+            {
+                _logger.LogDebug("{port} port IS busy", port);
+                return true;
+            }
         }
 
         _logger.LogDebug("{port} port is not busy", port);
