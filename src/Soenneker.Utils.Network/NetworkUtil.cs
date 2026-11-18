@@ -26,7 +26,8 @@ public sealed class NetworkUtil : INetworkUtil
 
         if (endpoints.Length == 0)
         {
-            _logger.LogDebug("{port} port is not busy", port);
+            if (_logger.IsEnabled(LogLevel.Debug))
+                _logger.LogDebug("{port} port is not busy", port);
             return false;
         }
 
@@ -34,12 +35,14 @@ public sealed class NetworkUtil : INetworkUtil
         {
             if (endpoints[i].Port == port)
             {
-                _logger.LogDebug("{port} port IS busy", port);
+                if (_logger.IsEnabled(LogLevel.Debug))
+                    _logger.LogDebug("{port} port IS busy", port);
                 return true;
             }
         }
 
-        _logger.LogDebug("{port} port is not busy", port);
+        if (_logger.IsEnabled(LogLevel.Debug))
+            _logger.LogDebug("{port} port is not busy", port);
         return false;
     }
 
